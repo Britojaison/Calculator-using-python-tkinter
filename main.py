@@ -3,13 +3,12 @@ from tkinter import Tk
 
 window: Tk = Tk()
 window.title("Calculator")
-window.geometry("320x390")
+window.geometry("320x398")
 frame = Frame(window)
 frame.grid()
 window.configure(bg='#011e42')
-mainscreen = Entry(window, width=100, bg='grey')
-mainscreen.grid(row=0, column=0, columnspan=12, sticky=E)
-
+mainscreen = Entry(window, width=100, bg='white', font=('Georgia 20'))
+mainscreen.grid(row=0, column=0, columnspan=37, sticky=E)
 
 def cliked(num):
     screen_num = mainscreen.get() + str(num)
@@ -24,7 +23,7 @@ def clr():
 def addition():
     first_num = mainscreen.get()
     global old_num
-    old_num = first_num
+    old_num = int(first_num)
     global opretion
     opretion = "addition"
     mainscreen.delete(0, END)
@@ -33,7 +32,7 @@ def addition():
 def substraction():
     first_num = mainscreen.get()
     global old_num
-    old_num = first_num
+    old_num = int(first_num)
     global opretion
     opretion = "substraction"
     mainscreen.delete(0, END)
@@ -42,7 +41,7 @@ def substraction():
 def multiplication():
     first_num = mainscreen.get()
     global old_num
-    old_num = first_num
+    old_num = int(first_num)
     global opretion
     opretion = "multiplication"
     mainscreen.delete(0, END)
@@ -51,11 +50,33 @@ def multiplication():
 def division():
     first_num = mainscreen.get()
     global old_num
-    old_num = first_num
+    old_num = int(first_num)
     global opretion
     opretion = "division"
     mainscreen.delete(0, END)
 
+
+def equals():
+    if opretion == "addition":
+        new_value = mainscreen.get()
+        mainscreen.delete(0, END)
+        result = int(old_num) + int(new_value)
+        mainscreen.insert(0,result)
+    if opretion == "substraction":
+        new_value = mainscreen.get()
+        mainscreen.delete(0, END)
+        result = int(old_num) - int(new_value)
+        mainscreen.insert(0,result)
+    if opretion == "multiplication":
+        new_value = mainscreen.get()
+        mainscreen.delete(0, END)
+        result = int(old_num) * int(new_value)
+        mainscreen.insert(0,result)
+    if opretion == "division":
+        new_value = mainscreen.get()
+        mainscreen.delete(0, END)
+        result = int(old_num) / int(new_value)
+        mainscreen.insert(0,result)
 
 b7 = Button(window, text="7", height=2, width=8, command=lambda: cliked(7))
 b7.grid(row=1, column=0, pady=10)
@@ -79,7 +100,7 @@ bdot = Button(window, text=".", height=2, width=8, command=lambda: cliked("."))
 bdot.grid(row=4, column=0, pady=10)
 b0 = Button(window, text="0", height=2, width=8, command=lambda: cliked(0))
 b0.grid(row=4, column=1)
-bequals = Button(window, text="=", height=2, width=8)
+bequals = Button(window, text="=", height=2, width=8, command=equals)
 bequals.grid(row=4, column=2)
 bplus = Button(window, text="+", height=2, width=8, command=addition)
 bplus.grid(row=5, column=0, pady=10)
@@ -89,7 +110,7 @@ bx = Button(window, text="X", height=2, width=8, command=multiplication)
 bx.grid(row=5, column=2)
 bdiv = Button(window, text="/", height=2, width=8, command=division)
 bdiv.grid(row=6, column=0, pady=10)
-bclr = Button(window, text="clr", height=2, width=8, command=clr)
+bclr = Button(window, text="clr", height=2, width=8,bg="red", command=clr)
 bclr.grid(row=6, column=1)
 be = Button(window, text="", height=2, width=8)
 be.grid(row=6, column=2)
